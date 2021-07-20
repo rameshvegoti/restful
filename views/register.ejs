@@ -1,0 +1,86 @@
+<% layout ('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/style.css">
+    <div class="container">
+        <div class="row">
+            <form action="/register" method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" name="username" id="username" aria-describedby="username">
+                    <span class="error-hint hidden">Enter valid username with atleast 6 characters</span>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+                    <span class="error-hint hidden">Enter valid email</span>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password">
+                    <span class="error-hint hidden">Password should contain 6 character atleast</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+
+        const usernameInput = document.querySelector('#username')
+        const emailInput = document.querySelector('#email')
+        const passwordInput = document.querySelector('#password')
+
+        const inputs = [usernameInput, emailInput, passwordInput]
+
+        const isValidEmail = (email) => {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        };
+
+        // const isValidPhone = (phone) => {
+        //     const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        //     return re.test(String(phone).toLowerCase());
+        // };
+
+        const resetInput = (el) => {
+            el.classList.remove('invalid')
+            el.nextElementSibling.classList.add('hidden')
+        }
+
+        const invalidateInput = (el) => {
+            el.classList.add('invalid')
+            el.nextElementSibling.classList.remove('hidden')
+            el.focus()
+        }
+
+        const validateInput = () => {
+            resetInput(usernameInput)
+            resetInput(emailInput)
+            resetInput(passwordInput)
+
+
+            if (!usernameInput.value || usernameInput.value.trim().length < 6) {
+                invalidateInput(usernameInput)
+            } else if (!isValidEmail(emailInput.value)) {
+                invalidateInput(emailInput)
+            } else if (!passwordInput.value || passwordInput.value.trim().length < 6) {
+                invalidateInput(passwordInput)
+            } else {
+                console.log('error')
+            }
+        }
+
+        inputs.forEach((input) => {
+            input.addEventListener('focusout', (e) => {
+                e.preventDefault()
+                validateInput()
+            })
+        })
+
+        inputs.forEach((input) => {
+            input.addEventListener('input', (e) => {
+                e.preventDefault()
+                validateInput()
+            })
+        })
+    </script>
