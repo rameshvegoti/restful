@@ -1,0 +1,27 @@
+<% layout ('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/products.css">
+    <div class="container">
+        <div class="row">
+            <h2>
+                <%=product.productname%> Details
+            </h2>
+
+            <div class="card">
+                <img src=<%=product.imageUrl%> class="card-img-top" alt="<%=product.productname%>">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%=product.productname%>
+                        </h5>
+                        <p class="card-text">Price: <%=product.price%>
+                        </p>
+                        <p class="card-text">Description: <%=product.description%>
+                        </p>
+                        <a href="/products/<%=product._id%>/edit" class="btn btn-success">Edit</a>
+                        <form action="/products/<%=product._id%>?_method=DELETE" method="POST" id="deleteForm">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,39 @@
+<% layout ('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/style.css">
+    <div class="container">
+        <div class="row">
+            <form action="/products/<%=product._id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productname" class="form-label">Product Name</label>
+                    <input type="text" class="form-control" name="productname" id="productname"
+                        aria-describedby="productname" value="<%=product.productname%>">
+                    <span class="error-hint hidden">Enter valid Product name </span>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" name="price" id="price" aria-describedby="price"
+                        value="<%=product.price%>">
+                    <span class="error-hint hidden">Enter valid price</span>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type="text" class="form-control" name="description" id="description"
+                        value="<%=product.description%>">
+                    <span class="error-hint hidden">Description should contain 10 character atleast</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 mb-3">
+                        <label for="image" class="form-label">Upload Product Image</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                        <span class="error-hint hidden">Require Image ...</span>
+                    </div>
+                    <div class="col-md-6 col-lg-6 mb-3">
+                        <div class="card" style="width: 18rem;">
+                            <img src="<%=product.imageUrl%>" class="card-img-top" alt="<%=product.imageId%>">
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>

@@ -7,6 +7,8 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const ejsMate = require('ejs-mate')
 const flash = require('connect-flash')
+const methodOverride = require('method-override')
+const {isLoggedIn} = require('./middleware')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -14,13 +16,15 @@ const port = process.env.PORT || 3000
 require('dotenv').config()
 
 const authRoutes = require('./routes/auth')
+const productRoutes = require('./routes/products')
 
 // MongoDB Connection
 const uri = process.env.DB_URL
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex : true
+    useCreateIndex : true,
+    useFindAndModify: false
 };
 
 mongoose.connect(uri, options)
@@ -34,6 +38,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended : true}))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(methodOverride('_method'))
 app.use(session({
     secret : 'thisshouldbebettersecret',
     resave : false,
@@ -53,13 +58,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-//login middleware
-const isLoggedIn = (req, res, next) =>{
-    if(!req.isAuthenticated()){
-        return res.redirect('/login')
-    }
-    next()
-}
 
 
 app.use((req, res, next) =>{
@@ -69,17 +67,28 @@ app.use((req, res, next) =>{
     next()
 })
 
-app.get('/', (req, res)=>{
-    res.render('landing')
-})
-
-
-app.get('/home', isLoggedIn, (req, res)=>{
-    res.render('home')
-})
 
 
 app.use('/', authRoutes)
+app.use('/', productRoutes)
+
+
+//404 found
+app.all('*', (req, res, next) =>{
+    next (new Error('Page Not Found!!!', 404))
+})
+
+// Error Handler
+app.use((err, req, res, next) =>{
+    const { statusCode = 500} = err;
+    if (err.name === 'CastError') {
+        err.message = 'Page not found'
+    } 
+    if (err.name === 'ValidationError'){
+        err.message = 'Validation Error in Form Data'
+    } 
+    res.status(statusCode).render('error', {err})
+})
 
 app.listen(port, ()=>{
     console.log(`NodeJS Server Started at Port ${port}`)
