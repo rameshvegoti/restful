@@ -1,4 +1,4 @@
-.card {
+/* .card {
     width: 15rem;
     padding: 0.05rem;
     margin: 0.5rem;
@@ -10,4 +10,9 @@
 
 #deleteForm {
     display: inline;
+} */
+
+#deleteBtn {
+    border: none;
+    background-color: none;
 }
