@@ -1,25 +1,41 @@
 <% layout ('layouts/boilerplate') %>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/auth.css">
     <div class="container">
         <div class="row">
-            <form action="/register" method="POST">
-                <div class="mb-3">
+            <form action="/register" method="POST" id="regForm">
+                <div class="form-group mb-3 text-center">
+                    <h3>REGISTRATION</h3>
+                    <span id="user"><i class="bi bi-person-circle"></i></span>
+                </div>
+                <div class="form-group mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" aria-describedby="username">
+                    <div class="input-group">
+                        <span class="input-group-text" id="username"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" name="username" id="username"
+                            aria-describedby="username">
+                    </div>
                     <span class="error-hint hidden">Enter valid username with atleast 6 characters</span>
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+                    <div class="input-group">
+                        <span class="input-group-text" id="email"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+                    </div>
                     <span class="error-hint hidden">Enter valid email</span>
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password">
+                    <div class="input-group">
+                        <span class="input-group-text" id="username"><i class="bi bi-file-lock2"></i></span>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
                     <span class="error-hint hidden">Password should contain 6 character atleast</span>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group mb-3">
+                    <button type="submit" class="form-control btn btn-block btn-primary">Register</button>
+                </div>
             </form>
         </div>
     </div>

@@ -1,18 +1,30 @@
 <% layout ('layouts/boilerplate') %>
+    <link rel="stylesheet" href="/css/auth.css">
     <div class="container">
         <div class="row">
-            <form action="/login" method="POST">
+            <form action="/login" method="POST" id="loginForm">
+                <div class="form-group mb-3 text-center">
+                    <h3>LOGIN</h3>
+                    <span id="user"><i class="bi bi-person-circle"></i></span>
+                </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="username" id="username" aria-describedby="username">
-
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="username"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" name="username" id="username"
+                            aria-describedby="username">
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password" id="password">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="username"><i class="bi bi-file-lock2"></i></span>
+                        <input type="password" class="form-control" name="password" id="password">
+                    </div>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group mb-3">
+                    <button type="submit" class="form-control btn btn-block btn-primary">Login</button>
+                </div>
             </form>
         </div>
     </div>
