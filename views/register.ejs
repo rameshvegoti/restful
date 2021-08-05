@@ -11,27 +11,27 @@
                 <div class="form-group mb-3">
                     <label for="username" class="form-label">Username</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="username"><i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" name="username" id="username"
-                            aria-describedby="username">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" name="username" id="username">
+                        <span class="error-hint hidden">Username must have atleast 6 characters</span>
                     </div>
-                    <span class="error-hint hidden">Enter valid username with atleast 6 characters</span>
+
                 </div>
                 <div class="form-group mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="email"><i class="bi bi-envelope"></i></span>
-                        <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+                        <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                        <input type="email" class="form-control" name="email" id="email"><br>
+                        <span class="error-hint hidden">Enter valid email</span>
                     </div>
-                    <span class="error-hint hidden">Enter valid email</span>
                 </div>
                 <div class="form-group mb-3">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
-                        <span class="input-group-text" id="username"><i class="bi bi-file-lock2"></i></span>
+                        <span class="input-group-text"><i class="bi bi-file-lock2"></i></span>
                         <input type="password" class="form-control" name="password" id="password">
+                        <span class="error-hint hidden">Password should contain 6 character atleast</span>
                     </div>
-                    <span class="error-hint hidden">Password should contain 6 character atleast</span>
                 </div>
                 <div class="form-group mb-3">
                     <button type="submit" class="form-control btn btn-block btn-primary">Register</button>
@@ -96,6 +96,7 @@
         inputs.forEach((input) => {
             input.addEventListener('input', (e) => {
                 e.preventDefault()
+
                 validateInput()
             })
         })
